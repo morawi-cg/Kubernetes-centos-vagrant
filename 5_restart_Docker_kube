@@ -1,0 +1,8 @@
+#!/bin/bash
+
+swapoff --a
+systemctl restart docker && systemctl enable docker
+systemctl  restart kubelet && systemctl enable kubelet
+
+
+~                                                              
