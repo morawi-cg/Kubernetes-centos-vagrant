@@ -7,8 +7,8 @@
 ### Support and completion scripts
 <p> These will carry out some adjustments to help correct the environment configuration files.</p>
 
- *1_firewalld 
- *2_sysctl
- *3_add-kube-repo-install-kubeadm
- *4_installdocker
- *5_restart_Docker_kube
+ * 1_firewalld 
+ * 2_sysctl
+ * 3_add-kube-repo-install-kubeadm
+ * 4_installdocker
+ * 5_restart_Docker_kube
