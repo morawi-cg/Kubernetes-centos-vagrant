@@ -7,3 +7,11 @@ sudo kubeadm --apiserver-advertise-address=10.0.0.17 --cri-socket=/var/run/crio/
 
 
 # kubeadm --apiserver-advertise-address=10.0.0.17:8080 --pod-network-cidr 10.244.0.0/16 init 
+
+# This is a recorrection to re-do the initiate
+
+rm -rf /etc/kubernetes/manifests/kube-apiserver.yaml
+rm -rf /etc/kubernetes/manifests/kube-controller-manager.yaml
+rm -rf /etc/kubernetes/manifests/kube-scheduler.yaml
+rm -rf /etc/kubernetes/manifests/etcd.yaml
+
