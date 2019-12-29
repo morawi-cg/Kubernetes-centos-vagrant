@@ -23,7 +23,7 @@ cat  > /etc/docker/daemon.json <<EOF
 }
 EOF
 
-echo "plugins_cri_systemd_cgroup = true" >> /etc/containerd/config.toml
+echo "#plugins_cri_systemd_cgroup = true" >> /etc/containerd/config.toml
 
 mkdir -p /etc/systemd/system/docker.service.d
 sudo systemctl enable docker
