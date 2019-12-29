@@ -1,0 +1,7 @@
+#!/bin/bash
+# Install prerequisites
+yum-config-manager --add-repo=https://cbs.centos.org/repos/paas7-crio-115-release/x86_64/os/
+# Install CRI-O
+yum install --nogpgcheck cri-o
+systemctl daemon-reload
+systemctl start crio
