@@ -2,6 +2,15 @@
 # Install prerequisites
 yum-config-manager --add-repo=https://cbs.centos.org/repos/paas7-crio-115-release/x86_64/os/
 # Install CRI-O
-yum install --nogpgcheck cri-o
+yum -y install --nogpgcheck cri-o
 systemctl daemon-reload
 systemctl start crio
+
+cat > /etc/modules-load.d/containerd.conf <<EOF
+overlay
+br_netfilter
+EOF
+
+modprobe overlay
+modprobe br_netfilter
+sysctl --system
