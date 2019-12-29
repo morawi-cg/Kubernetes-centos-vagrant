@@ -1,8 +1,8 @@
 #!/bin/bash
+#You can also perform this action in beforehand using 'kubeadm config images pull'
+# The addition of --cri-socket=/var/run/crio/crio.sock was added to accomodate the container runtime element.
 
-kubeadm --apiserver-advertise-address=10.0.0.17:8080 init
-
-
+sudo kubeadm --apiserver-advertise-address=10.0.0.17 --cri-socket=/var/run/crio/crio.sock init
 ##  Flannel only ##
 
 
