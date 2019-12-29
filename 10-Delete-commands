@@ -1,0 +1,3 @@
+#!/bin/bash
+# name-space is an example the rest can more or less be the same
+#kubectl delete pod `kubectl get pods --namespace kube-system | awk '$3 == "Error" {print $1}'` --namespace kube-system
