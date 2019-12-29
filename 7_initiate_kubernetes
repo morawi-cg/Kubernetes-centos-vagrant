@@ -1,8 +1,10 @@
 #!/bin/bash
 #You can also perform this action in beforehand using 'kubeadm config images pull'
 # The addition of --cri-socket=/var/run/crio/crio.sock was added to accomodate the container runtime element.
-
-sudo kubeadm --apiserver-advertise-address=10.0.0.17 --cri-socket=/var/run/crio/crio.sock init
+swapoff --all
+The docker one worked, the crio was a failure, more investigation needed
+# sudo kubeadm --apiserver-advertise-address=10.0.0.17 --cri-socket=/var/run/crio/crio.sock init
+sudo kubeadm --apiserver-advertise-address=10.0.0.17 --cri-socket=/var/run/dockershim.sock init
 ##  Flannel only ##
 
 

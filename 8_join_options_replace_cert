@@ -1,0 +1,3 @@
+#!/bin/bash
+
+kubeadm join 10.0.0.17:6443 --token zd0b97.siut8twvyl6z1t9k --discovery-token-ca-cert-hash sha256:4b460ca0f5a53d699c42e536fb36ae50f9e72ae07c1b3aac5a46cc2c2876d860 --cri-socket=/var/run/dockershim.sock
