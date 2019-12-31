@@ -12,3 +12,14 @@
  * 3_add-kube-repo-install-kubeadm
  * 4_installdocker
  * 5_restart_Docker_kube
+
+####Note:
+
+```
+   '/etc/containerd/config.toml'
+  ## Must have these lines, else it will not start
+  disabled_plugins = ["cri"]
+  plugins_cri_systemd_cgroup = ["true"]
+  root = "/var/lib/containerd"
+
+```
