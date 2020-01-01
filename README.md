@@ -13,7 +13,7 @@
  * 4_installdocker
  * 5_restart_Docker_kube
 
-####Note:
+#### Note:
 
 ```
    '/etc/containerd/config.toml'
@@ -23,7 +23,7 @@
   root = "/var/lib/containerd"
 
 ```
-####Note for debug and analysis:
+#### Note for debug and analysis:
 
 This command is essential to analysing the relationship, between containerd & kubelet:
 
