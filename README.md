@@ -23,3 +23,12 @@
   root = "/var/lib/containerd"
 
 ```
+####Note for debug and analysis:
+
+This command is essential to analysing the relationship, between containerd & kubelet:
+
+```
+
+   eval $(kubelet docker-env -u)
+
+```
