@@ -30,5 +30,10 @@ This command is essential to analysing the relationship, between containerd & ku
 ```
 
    eval $(kubelet docker-env -u)
+   sudo lsblk 
+   sudo docker ps --format 'table {{.Image}}t{{.Status}}'
+   kubectl get events
+   kubectl get service
+   vagrant ssh node-1 -c 'sudo docker images'
 
 ```
