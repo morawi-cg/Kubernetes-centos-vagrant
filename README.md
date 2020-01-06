@@ -13,7 +13,7 @@
  * 4_installdocker
  * 5_restart_Docker_kube
 
-####Note:
+#### Note:
 
 ```
    '/etc/containerd/config.toml'
@@ -21,5 +21,19 @@
   disabled_plugins = ["cri"]
   plugins_cri_systemd_cgroup = ["true"]
   root = "/var/lib/containerd"
+
+```
+#### Note for debug and analysis:
+
+This command is essential to analysing the relationship, between containerd & kubelet:
+
+```
+
+   eval $(kubelet docker-env -u)
+   sudo lsblk 
+   sudo docker ps --format 'table {{.Image}}t{{.Status}}'
+   kubectl get events
+   kubectl get service
+   vagrant ssh node-1 -c 'sudo docker images'
 
 ```
