@@ -1,4 +1,4 @@
-# #Kubernetes
+# Kubernetes
 Created Saturday 28 December 2019
 ## Access dashboard after setting:
 
@@ -9,18 +9,15 @@ Created Saturday 28 December 2019
 ```
 ## Docker persistent storage:
 
-#####Storage Testing:
-'Loop-LVM' :for making files on local disk,(physical or virtual) act as strogage devices for the containers. useful for checking the compatibility issues and driver library issues.
+##### Storage Testing:
+**Loop-LVM** :for making files on local disk,(physical or virtual) act as strogage devices for the containers. useful for checking the compatibility issues and driver library issues.
 
-#####Storage Live Implementation,(Production):
-'direct-lvm' Once all problems have been ioned out, the progress to building live systems should only be implemented vi direct-lvm. Both systems use block access mode.
+##### Storage Live Implementation,(Production):
+**direct-lvm** Once all problems have been ioned out, the progress to building live systems should only be implemented vi direct-lvm. Both systems use block access mode.
  
 The two moder use snapshot and thinprovisioning for container technology framework, components of that can be found in the Linux Kernel.
 
 Use Docker save to save container later on to an image, can use squash to make an image thinner.
-
-*****
-
 
 ```
 <https://docs.docker.com/storage/storagedriver/device-mapper-driver/>
@@ -33,7 +30,7 @@ Use Docker save to save container later on to an image, can use squash to make a
 ```
 
 
-* ##Kubernetes network:
+ ## Kubernetes network:
 
 
 
@@ -53,15 +50,6 @@ Comes with core os. some what defacto with Kubernetes, it is in most installs. I
 #### Calico:
  Layer 3 based networking model, propagate routes to virtual routes via BGP, as its low level access based and utilize Linux Kernel modules it can benefit from ACL, no need to overlay or virtual routes. this makes matters easier. more performant too. 
 
-
-*****
-
-
-
-
-brctl show
-
-
 1- Service definition template:
 
 ```
@@ -79,8 +67,11 @@ spec:
   selector: 
 name: node-js
 
-####Node-js controller below:
+```
 
+#### Node-js controller below:
+
+```
 apiVersion: v1 
 kind: ReplicationController 
 metadata: 
@@ -108,7 +99,7 @@ image: jonbaier/node-express-info:latest
 ports: 
 - containerPort: 80
 ```
-####Node-js-labels-service
+#### Node-js-labels-service
 
 ```
 apiVersion: v1 
@@ -128,17 +119,16 @@ name: node-js-labels
 app: node-js-express 
 deployment: test
 
-####Create the replication controller and service as follows:
+```
+#### Create the replication controller and service as follows:
 
 ```
-
 $ kubectl create -f nodejs-labels-controller.yaml
 $ kubectl create -f nodejs-labels-service.yaml
 
 ```
-####Note: According to digital ocean:
+#### Note: According to digital ocean:
 
-*****
 
 The very first time, you are deploying both kubernetes service(s) which provides the IP, and kubernetes pod(s) deployment(s).
 
@@ -167,6 +157,7 @@ status:
   loadBalancer:
 ingress:
 - ip: 192.0.2.127
+
 ```
 
 ### Post Start and Pre stop ,(conditions):
@@ -205,7 +196,7 @@ exec:
 
 ```
 
-##Replica sets: Replica sets are the new and improved version of replication controllers.
+## Replica sets: Replica sets are the new and improved version of replication controllers.
 
 ```
 
@@ -233,12 +224,12 @@ spec:
 image: jonbaier/node-express-info:latest 
 ports: 
 - containerPort: 80
+
 ```
 
 
 #### Replicaset VS Replicationcontroller:
 
-Replica set below
 ```
 apiVersion: extensions/v1beta1 
 kind: ReplicaSet 
@@ -264,9 +255,10 @@ spec:
 image: jonbaier/node-express-info:latest 
 ports: 
 - containerPort: 80
+
 # Listing 2-6: nodejs-labels-replicaset.yaml
 ```
-Replication controller:
+## Replication controller:
 
 ```
 apiVersion: v1 
@@ -296,17 +288,18 @@ path: /status/
 port: 80 
   initialDelaySeconds: 30 
   timeoutSeconds: 1
-#Listing 2-7: nodejs-health-controller.yaml
+# Listing 2-7: nodejs-health-controller.yaml
+
 ```
 
 ## Health Check example:
 
-```
+
 Kubernetes provides two layers of health checking. First, in the form of HTTP or TCP checks, K8s can attempt to connect to a particular endpoint and give a status of healthy on a successful connection. Second, application-specific health checks can be performed using command-line scripts.
 
 Let's take a look at a few health checks in action. First, we'll create a new controller with a health check:
 
-
+```
 apiVersion: v1 
 kind: ReplicationController 
 metadata: 
@@ -334,15 +327,16 @@ path: /status/
 port: 80 
   initialDelaySeconds: 30 
   timeoutSeconds: 1
+
 #Listing 2-7: nodejs-health-controller.yaml
 
-#Note the addition of the livenessprobe element. This is our core health check element. From here, we can specify httpGet, tcpScoket, or exec. In #this example, we use httpGet to perform a simple check for a URI on our container. The probe will check the path and port specified and restart he #pod if it doesn't successfully return.
+```
+# Note the addition of the livenessprobe element. This is our core health check element. From here, we can specify httpGet, tcpScoket, or exec. In #this example, we use httpGet to perform a simple check for a URI on our container. The probe will check the path and port specified and restart he #pod if it doesn't successfully return.
 
 #Status codes between 200 and 399 are all considered healthy by the probe.
 #Finally, initialDelaySeconds gives us the flexibility to delay health checks until the pod has finished initializing. The timeoutSeconds value is simply #the timeout value for the probe.
 
-```
-###Deployment
+### Deployment
 A new improved way over replication controllers, offer more flexible way of updating the apps:
 
 ```
@@ -381,7 +375,7 @@ command: ["cowsay", "Finishing that task in a jiffy"]
   restartPolicy: OnFailure
 ## Listing 5-5: longtask.yaml
 
-```
+
 Example for validation:
 
 ```
@@ -391,7 +385,6 @@ Example for validation:
 Job Scheduler example:
 
 ```
-
 apiVersion: batch/v2alpha1
 kind: CronJob
 metadata:
@@ -410,11 +403,9 @@ command: ["cowsay", "Developers! Developers! Developers!
 complete!"]
   restartPolicy: OnFailure
 ##Listing 5-6. longtask-cron.yaml
-
 ```
 
-##Daemon Set: Will run on every node in the cluster
-
+##  Daemon Set: Will run on every node in the cluster
 ```
 
 apiVersion: extensions/v1beta1
@@ -482,7 +473,7 @@ emptyDir:
 #Listing 6-1: storage-memory.yaml
 
 
-#####Operational commands
+##### Operational commands
 
 ```
 $ kubectl create -f storage-memory.yaml
@@ -539,22 +530,22 @@ gulp.task('update-kube-pod', shell.task([
 * Useful commands: 
 
 
-   ```
+```
   sudo lsblk 
   sudo docker ps --format 'table ![](./README2_files/.Image)t![](./README2_files/.Status)'
   kubectl get events
   kubectl get service
    vagrant ssh node-1 -c 'sudo docker images'
 eval $(kubelet docker-env -u)       
-   ```
-This command is very key on debuginng docker
+```
+This command is very key on debuging docker
 
+```
 sudo docker ps --format 'table ![](./README2_files/.Image)t![](./README2_files/.Status)'
 
 Scaling manually:
 
 ```
-
 $ kubectl scale --replicas=3 rc/node-js-scale-b
 $ kubectl scale --replicas=1 rc/node-js-scale-a
 $ kubectl scale --replicas=4 rc/node-js-scale-b
